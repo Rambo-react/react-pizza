@@ -1,10 +1,11 @@
 import React from 'react'
+import PizzaList from './PizzaList'
 
 const PizzaBlock = () => {
-
   return (
-    <div style={{'border' : '2px solid black'}}>
+    <div>
       PizzaBlock
+      <PizzaList />
     </div>
   )
 }

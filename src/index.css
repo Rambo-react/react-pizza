@@ -1,8 +1,23 @@
-/*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
 
+
+/*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
+/* @import url('https://fonts.googleapis.com/css2?family=Barriecito&display=swap'); */
+@import url('https://fonts.googleapis.com/css2?family=Barriecito&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
 /* Document
    ========================================================================== */
 
+  * {
+    padding: 0;
+  margin: 0;
+  list-style: none;
+  outline: none;
+  font-family: "Nunito", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 10px;
+  box-sizing: border-box;
+  }
 /**
  * 1. Correct the line height in all browsers.
  * 2. Prevent adjustments of font size after orientation changes in iOS.
@@ -21,6 +36,10 @@
  */
 
 body {
+  /* font-family: "Barriecito", system-ui;
+  font-weight: 400;
+  font-style: normal; */
+
   margin: 0;
 }
 
@@ -30,6 +49,10 @@ body {
 
 main {
   display: block;
+}
+
+ul {
+  padding: 0px;
 }
 
 /**
