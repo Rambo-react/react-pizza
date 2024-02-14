@@ -1,13 +1,20 @@
 import './App.css'
+import Categories from './components/Categories/Categories'
 import Header from './components/Header/Header'
-import PizzaBlock from './components/PizzaBlock/PizzaBlock'
+import PizzaList from './components/PizzaList/PizzaList'
+import Card from './components/UI/Card'
+import Sort from './components/Sort/Sort'
 
 const App = () => {
   return (
-    <div>
+    <Card>
       <Header />
-      <PizzaBlock />
-    </div>
+      <div className='content_top'>
+        <Categories />
+        <Sort />
+      </div>
+      <PizzaList />
+    </Card>
   )
 }
 
