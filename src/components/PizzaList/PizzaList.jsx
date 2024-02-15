@@ -1,6 +1,6 @@
 import React from 'react'
 import PizzaItem from './PizzaItem'
-import styles from './PizzaList.module.css'
+import styles from './PizzaList.module.scss'
 
 const DUMMY_PIZAA = [
   {

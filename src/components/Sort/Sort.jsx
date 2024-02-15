@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import styles from './Sort.module.css'
+import styles from './Sort.module.scss'
 
 const sortNames = ['популярности', 'цене', 'алфавиту']
 

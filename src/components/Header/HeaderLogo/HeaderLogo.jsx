@@ -1,14 +1,14 @@
 import React from 'react'
-import styles from './HeaderLogo.module.css'
+import styles from './HeaderLogo.module.scss'
 import icon from '../../../assets/svg/pizza-svg.svg'
 
 const HeaderLogo = () => {
   return (
     <a className={styles.logo} href='/'>
-      <img className={styles.image} src={icon} />
+      <img src={icon} />
       <div>
-        <h1 className={styles.title}>React Pizza</h1>
-        <p className={styles.slogan}>Самая рекативная пицца в мире!</p>
+        <h1>React Pizza</h1>
+        <p>Самая рекативная пицца в мире!</p>
       </div>
     </a>
   )

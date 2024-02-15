@@ -1,0 +1,48 @@
+.sort {
+  position: relative;
+}
+
+.label {
+  display: flex;
+  align-items: center;
+
+  b,
+  span {
+    font-size: 1.6rem;
+  }
+
+  b {
+    margin: 0 6px;
+  }
+
+  span {
+    color: orange;
+    border-bottom: 1px dashed orange;
+    cursor: pointer;
+  }
+}
+
+.popup {
+  position: absolute;
+  right: 0;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.09);
+  margin-top: 15px;
+  padding: 10px 0;
+
+  li {
+    font-size: 1.6rem;
+    cursor: pointer;
+    padding: 12px 20px;
+    &:hover {
+      background-color: #f4f4f4;
+    }
+  }
+}
+
+.active {
+  background-color: #f4f4f4;
+  color: orange;
+  font-weight: 700;
+}

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import styles from './PizzaItem.module.css'
+import styles from './PizzaItem.module.scss'
 
 const PizzaItem = (props) => {
   const typeNames = ['традиционное', 'тонкое']

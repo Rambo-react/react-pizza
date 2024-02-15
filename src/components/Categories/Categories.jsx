@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import styles from './Categories.module.css'
+import styles from './Categories.module.scss'
 
 const categories = [
   'Все',

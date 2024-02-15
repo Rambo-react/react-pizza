@@ -15,6 +15,17 @@
   -moz-user-select: none; /* Old versions of Firefox */
   -ms-user-select: none; /* Internet Explorer/Edge */
   user-select: none; /* Non-prefixed version, currently supported by Chrome, Opera and Firefox */
+
+  &:hover {
+    background-color: rgba(255, 165, 0, 0.9);
+  }
+  &:active {
+    background-color: rgb(230, 149, 0);
+    transform: translateY(1px);
+  }
+  span {
+    font-size: 1.6rem;
+  }
 }
 
 .delimiter {
@@ -26,13 +37,4 @@
 
 .icon {
   margin-right: 7px;
-}
-
-.cart:hover {
-  background-color: rgba(255, 165, 0, 0.9);
-}
-
-.cart:active {
-  background-color: rgb(230, 149, 0);
-  transform: translateY(1px);
 }

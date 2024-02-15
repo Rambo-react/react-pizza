@@ -1,4 +1,4 @@
-import './App.css'
+import styles from './App.module.scss'
 import Categories from './components/Categories/Categories'
 import Header from './components/Header/Header'
 import PizzaList from './components/PizzaList/PizzaList'
@@ -9,7 +9,7 @@ const App = () => {
   return (
     <Card>
       <Header />
-      <div className='content_top'>
+      <div className={styles['content_top']}>
         <Categories />
         <Sort />
       </div>
