@@ -1,19 +1,20 @@
-import styles from './App.module.scss'
-import Categories from './components/Categories/Categories'
 import Header from './components/Header/Header'
-import PizzaList from './components/PizzaList/PizzaList'
 import Card from './components/UI/Card'
-import Sort from './components/Sort/Sort'
+import HomePage from './pages/HomePage'
+import CartPage from './pages/CartPage'
+import { Routes, Route } from 'react-router-dom'
+import NotFoundPage from './pages/NotFoundPage'
 
 const App = () => {
   return (
     <Card>
       <Header />
-      <div className={styles['content_top']}>
-        <Categories />
-        <Sort />
-      </div>
-      <PizzaList />
+      <Routes>
+        <Route path='/' element={<HomePage />} />
+        {/* <Route path='/home' element={<HomePage />} /> */}
+        <Route path='/cart' element={<CartPage />} />
+        <Route path='*' element={<NotFoundPage />} />
+      </Routes>
     </Card>
   )
 }
