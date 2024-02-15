@@ -1,7 +1,7 @@
 import React from 'react'
-import styles from './Cart.module.scss'
+import styles from './CartButton.module.scss'
 
-const Cart = () => {
+const CartButton = () => {
   return (
     <a href='/cart' className={styles.cart}>
       <span>0 руб.</span>
@@ -41,4 +41,4 @@ const Cart = () => {
   )
 }
 
-export default Cart
+export default CartButton
