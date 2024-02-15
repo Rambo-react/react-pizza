@@ -53,7 +53,7 @@ const PizzaItem = (props) => {
             />
           </svg>
           <span>Добавить</span>
-          <i>2</i>
+          <i>1</i>
         </button>
       </div>
     </div>
