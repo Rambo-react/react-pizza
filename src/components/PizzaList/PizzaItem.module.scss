@@ -1,3 +1,6 @@
+@use '../../styles/mixins';
+@import '../../styles/variables';
+
 .wrapper {
   width: 280px;
   text-align: center;
@@ -67,19 +70,14 @@
   text-align: center;
   cursor: pointer;
   transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
-  border: 1px solid orange;
+  border: 1px solid $main-color;
 
-  -webkit-touch-callout: none; /* iOS Safari */
-  -webkit-user-select: none; /* Safari */
-  -khtml-user-select: none; /* Konqueror HTML */
-  -moz-user-select: none; /* Old versions of Firefox */
-  -ms-user-select: none; /* Internet Explorer/Edge */
-  user-select: none; /* Non-prefixed version, currently supported by Chrome, Opera and Firefox */
-  color: orange;
+  @include mixins.noselect();
+  color: $main-color;
 
   span {
     font-size: 1.6rem;
-    color: orange;
+    color: $main-color;
   }
 
   i,
@@ -93,14 +91,14 @@
     margin-right: 2px;
 
     path {
-      fill: orange;
+      fill: $main-color;
     }
   }
 
   i {
     display: inline-block;
     border-radius: 30px;
-    background-color: orange;
+    background-color: $main-color;
     color: #fff;
     font-weight: 600;
     width: 22px;
@@ -114,7 +112,8 @@
   }
 
   &:hover {
-    background-color: rgba(255, 165, 0, 0.9);
+    background-color: darken($color: $main-color, $amount: 8);
+    border-color: darken($color: $main-color, $amount: 8);
     color: white;
     span {
       color: white;
@@ -122,7 +121,7 @@
 
     i {
       background-color: white;
-      color: orange;
+      color: $main-color;
     }
 
     svg path {
@@ -131,7 +130,8 @@
   }
 
   &:active {
-    background-color: rgb(230, 149, 0);
+    border-color: darken($color: $main-color, $amount: 12);
+    background-color: darken($color: $main-color, $amount: 12);
     transform: translateY(1px);
     color: white;
   }

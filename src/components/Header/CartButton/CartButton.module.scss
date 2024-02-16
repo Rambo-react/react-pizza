@@ -1,26 +1,24 @@
+@use '../../../styles/mixins';
+@import '../../../styles/variables';
+
 .cart {
   display: flex;
   align-items: center;
   padding: 15px 20px;
-  background-color: orange;
+  background-color: $main-color;
   color: white;
   border-radius: 30px;
   text-decoration: none;
   cursor: pointer;
   transition: background-color 0.15s ease-in-out;
 
-  -webkit-touch-callout: none; /* iOS Safari */
-  -webkit-user-select: none; /* Safari */
-  -khtml-user-select: none; /* Konqueror HTML */
-  -moz-user-select: none; /* Old versions of Firefox */
-  -ms-user-select: none; /* Internet Explorer/Edge */
-  user-select: none; /* Non-prefixed version, currently supported by Chrome, Opera and Firefox */
+  @include mixins.noselect();
 
   &:hover {
-    background-color: rgba(255, 165, 0, 0.9);
+    background-color: darken($color: $main-color, $amount: 8);
   }
   &:active {
-    background-color: rgb(230, 149, 0);
+    background-color: darken($color: $main-color, $amount: 12);
     transform: translateY(1px);
   }
   span {

@@ -1,3 +1,4 @@
+@import '../../styles/variables';
 .sort {
   position: relative;
 }
@@ -16,8 +17,8 @@
   }
 
   span {
-    color: orange;
-    border-bottom: 1px dashed orange;
+    color: $main-color;
+    border-bottom: 1px dashed $main-color;
     cursor: pointer;
   }
 }
@@ -43,6 +44,6 @@
 
 .active {
   background-color: #f4f4f4;
-  color: orange;
+  color: $main-color;
   font-weight: 700;
 }
