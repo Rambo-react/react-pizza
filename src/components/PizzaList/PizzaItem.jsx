@@ -29,7 +29,7 @@ const PizzaItem = (props) => {
   return (
     <div className={styles.wrapper}>
       <div>
-        <img className={styles.image} src={props.imageUrl} />
+        <img className={styles.image} src={props.imageUrl} alt={props.title} />
       </div>
 
       <h4 className={styles.title}>{props.title}</h4>
