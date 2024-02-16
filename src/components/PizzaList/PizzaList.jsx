@@ -17,6 +17,7 @@ const PizzaList = () => {
 
       setPizzaList(data)
       setIsLoading(false)
+      window.scrollTo(0, 0)
     }
 
     getPizza()
