@@ -4,6 +4,7 @@ import styles from './Cart.module.scss'
 import CartIcon from '../UI/CartIcon'
 import TrashIcon from '../UI/TrashIcon'
 import { Link } from 'react-router-dom'
+import CartItem from './CartItem/CartItem'
 
 const Cart = (props) => {
   let content
@@ -34,7 +35,7 @@ const Cart = (props) => {
     <div className={styles.cart}>
       <div className={styles.top}>
         <h2>
-          <CartIcon stroke={'black'} />
+          <CartIcon />
           <span>Корзина</span>
         </h2>
         <div className={styles.clear}>
@@ -43,10 +44,10 @@ const Cart = (props) => {
         </div>
       </div>
 
-      <div className={styles.items}>
-        <div className={styles.item}>CART ITEM 1 </div>
-        <div className={styles.item}>CART ITEM 2 </div>
-      </div>
+      <ul className={styles.items}>
+        <CartItem />
+        <CartItem />
+      </ul>
 
       <div className={styles.bottom}>
         <div className={styles.details}>

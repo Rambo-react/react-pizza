@@ -1,0 +1,90 @@
+@import '../../../styles/variables';
+.item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0px;
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  img {
+    margin-right: 10px;
+    width: 70px;
+  }
+
+  .description {
+    text-align: left;
+    h2 {
+      font-size: 1.8rem;
+      font-weight: 700;
+    }
+    p {
+      margin-top: 4px;
+    }
+    span {
+      color: #7b7b7b;
+      font-size: 1.2rem;
+    }
+  }
+}
+
+.button {
+  border: 1px solid transparent;
+  background-color: white;
+  border-radius: 50px;
+  width: 30px;
+  height: 30px;
+  transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
+  cursor: pointer;
+  &:active {
+    transform: translateY(1px);
+  }
+}
+
+.counter {
+  button {
+    font-size: 2rem;
+    border-color: $main-color;
+    color: $main-color;
+    &:hover {
+      color: white;
+      background-color: $main-color;
+    }
+    &:active {
+      color: white;
+      border-color: darken($color: $main-color, $amount: 8);
+      background-color: darken($color: $main-color, $amount: 8);
+      transform: translateY(1px);
+    }
+  }
+  span {
+    margin: 0 10px;
+    font-size: 1.4rem;
+    font-weight: 700;
+  }
+}
+
+.price {
+  font-size: 1.8rem;
+  font-weight: 700;
+}
+
+.delete {
+  font-size: 1.4rem;
+  border: 1px solid #f6f6f6;
+  border-color: darken(#f6f6f6, 10);
+
+  color: darken(#f6f6f6, 20);
+
+  &:hover {
+    background-color: black;
+    border-color: black;
+    color: white;
+  }
+
+  &:active {
+    background-color: lighten($color: black, $amount: 10);
+  }
+}
