@@ -26,7 +26,7 @@ const PizzaList = () => {
   let content
 
   if (isLoading) {
-    content = [...new Array(6)].map((item, index) => (
+    content = [...new Array(8)].map((item, index) => (
       <PizzaSkeleton key={index} />
     ))
   }
