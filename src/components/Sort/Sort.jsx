@@ -1,24 +1,35 @@
 import React, { useState } from 'react'
 import styles from './Sort.module.scss'
+import { useSelector, useDispatch } from 'react-redux'
+import { setSort } from '../../redux/slices/filterSlice'
 
-const sortNames = ['популярности', 'цене', 'алфавиту']
+const sortNames = [
+  { name: 'популярности(возрастанию)', sortProperty: 'rating', order: 'asc' },
+  { name: 'популярности(убыванию)', sortProperty: 'rating', order: 'desc' },
+  { name: 'цене(возрастанию)', sortProperty: 'price', order: 'asc' },
+  { name: 'цене(убыванию)', sortProperty: 'price', order: 'desc' },
+  { name: 'алфавиту(возрастанию)', sortProperty: 'title', order: 'asc' },
+  { name: 'алфавиту(убыванию)', sortProperty: 'title', order: 'desc' },
+]
 
 const Sort = () => {
-  const [isVisiblePopup, setIsVisiblePopap] = useState(false)
-  const [activeSort, setActiveSort] = useState(0)
+  const sort = useSelector((state) => state.filter.sort)
+  const dispatch = useDispatch()
 
-  const selectSortHandler = (index) => {
-    setActiveSort(index)
+  const [isVisiblePopup, setIsVisiblePopap] = useState(false)
+
+  const selectSortHandler = (el) => {
+    dispatch(setSort(el))
     setIsVisiblePopap(false)
   }
 
-  const sortList = sortNames.map((el, index) => (
+  const sortList = sortNames.map((el) => (
     <li
-      className={index === activeSort ? styles.active : ''}
-      key={el}
-      onClick={() => selectSortHandler(index)}
+      className={sort.name === el.name ? styles.active : ''}
+      key={el.name}
+      onClick={() => selectSortHandler(el)}
     >
-      {el}
+      {el.name}
     </li>
   ))
 
@@ -39,7 +50,7 @@ const Sort = () => {
         </svg>
         <b>Сортировка по:</b>
         <span onClick={() => setIsVisiblePopap(!isVisiblePopup)}>
-          {sortNames[activeSort]}
+          {sort.name}
         </span>
       </div>
       {isVisiblePopup && (
