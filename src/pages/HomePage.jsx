@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
-
+import axios from 'axios'
 import styles from './HomePage.module.scss'
 import Categories from '../components/Categories/Categories'
 import PizzaList from '../components/PizzaList/PizzaList'
@@ -27,18 +27,17 @@ const HomePage = () => {
       const baseUrl =
         'https://65cb86f8efec34d9ed87b36c.mockapi.io/pizza-api/menu'
 
-      const responce = await fetch(
-        `${baseUrl}?${category}&${searchStr}&${sortType}&${sortOrder}`
-      )
-      setIsLoading(false)
+      try {
+        const response = await axios.get(
+          `${baseUrl}?${category}&${searchStr}&${sortType}&${sortOrder}`
+        )
 
-      if (responce.ok) {
-        const data = await responce.json()
-        setPizzaList(data)
+        setPizzaList(response.data)
         setIsFoundItems(true)
-      } else {
+      } catch (error) {
         setIsFoundItems(false)
       }
+      setIsLoading(false)
       window.scrollTo(0, 0)
     }
 

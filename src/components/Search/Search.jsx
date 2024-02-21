@@ -12,7 +12,6 @@ const Search = () => {
   const debouncedSearchValue = useDebounce(inputValue, 1000)
 
   useEffect(() => {
-    console.log('dispatch', debouncedSearchValue)
     dispatch(setSearchValue(debouncedSearchValue))
   }, [debouncedSearchValue, dispatch])
 
@@ -23,8 +22,6 @@ const Search = () => {
   const onClearHandler = () => {
     setInputValue('')
   }
-
-  console.log('redder search', inputValue)
 
   return (
     <div className={styles.wrapper}>
