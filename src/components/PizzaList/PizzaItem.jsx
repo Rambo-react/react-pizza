@@ -18,7 +18,7 @@ const PizzaItem = (props) => {
 
   const contentTypes = props.types.map((typeIndex, i) => (
     <li
-      onClick={() => setActiveType(typeIndex)}
+      onClick={() => setActiveType(i)}
       className={i === activeType ? styles.active : ''}
       key={typeIndex}
     >
