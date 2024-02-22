@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-const initialState = {
+export const initialState = {
   categoryId: 0,
   sort: {
     name: 'популярности(возрастанию)',
@@ -32,6 +32,11 @@ export const filterSlice = createSlice({
     setTotalPages(state, action) {
       state.totalPages = action.payload
     },
+    setFilters(state, action) {
+      state.sort = action.payload.sort
+      state.categoryId = Number(action.payload.categoryId)
+      state.searchValue = action.payload.searchValue
+    },
   },
 })
 
@@ -41,6 +46,7 @@ export const {
   setSearchValue,
   setCurrentPage,
   setTotalPages,
+  setFilters,
 } = filterSlice.actions
 
 export default filterSlice.reducer

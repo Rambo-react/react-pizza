@@ -3,7 +3,7 @@ import styles from './Sort.module.scss'
 import { useSelector, useDispatch } from 'react-redux'
 import { setCurrentPage, setSort } from '../../redux/slices/filterSlice'
 
-const sortNames = [
+export const sortNames = [
   { name: 'популярности(возрастанию)', sortProperty: 'rating', order: 'asc' },
   { name: 'популярности(убыванию)', sortProperty: 'rating', order: 'desc' },
   { name: 'цене(возрастанию)', sortProperty: 'price', order: 'asc' },

@@ -1,13 +1,15 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import axios from 'axios'
 import styles from './HomePage.module.scss'
 import Categories from '../components/Categories/Categories'
 import PizzaList from '../components/PizzaList/PizzaList'
-import Sort from '../components/Sort/Sort'
+import Sort, { sortNames } from '../components/Sort/Sort'
 import NotFoundPage from './NotFoundPage'
 import Pagination from '../components/Pagination/Pagination'
-import { setTotalPages } from '../redux/slices/filterSlice'
+import { setFilters, setTotalPages } from '../redux/slices/filterSlice'
+import qs from 'qs'
+import { useNavigate } from 'react-router-dom'
 
 const HomePage = () => {
   const [pizzaList, setPizzaList] = useState([])
@@ -15,6 +17,9 @@ const HomePage = () => {
   const [isFoundItems, setIsFoundItems] = useState(true)
 
   const dispatch = useDispatch()
+  const navigate = useNavigate()
+  const isSearch = useRef(false)
+  const isMounted = useRef(false)
 
   const categoryId = useSelector((state) => state.filter.categoryId)
   const sort = useSelector((state) => state.filter.sort)
@@ -22,6 +27,37 @@ const HomePage = () => {
   const totalPages = useSelector((state) => state.filter.totalPages)
   const currentPage = useSelector((state) => state.filter.currentPage)
   const limitPage = useSelector((state) => state.filter.limitPage)
+
+  useEffect(() => {
+    if (window.location.search) {
+      const urlParams = qs.parse(window.location.search.substring(1))
+      const sort = sortNames.find(
+        (obj) =>
+          obj.sortProperty === urlParams.sortBy && obj.order === urlParams.order
+      )
+      dispatch(
+        setFilters({
+          ...urlParams,
+          searchValue: urlParams.title,
+          sort,
+        })
+      )
+      isSearch.current = true
+    }
+  }, [dispatch])
+
+  useEffect(() => {
+    if (isMounted.current) {
+      const queryString = qs.stringify({
+        categoryId,
+        title: searchValue,
+        sortBy: sort.sortProperty,
+        order: sort.order,
+      })
+      navigate(`?${queryString}`)
+    }
+    isMounted.current = true
+  }, [categoryId, searchValue, sort.sortProperty, sort.order, navigate])
 
   useEffect(() => {
     const getPizza = async () => {
@@ -49,7 +85,11 @@ const HomePage = () => {
       window.scrollTo(0, 0)
     }
 
-    getPizza()
+    if (!isSearch.current) {
+      getPizza()
+    }
+
+    isSearch.current = false
   }, [
     categoryId,
     sort.sortProperty,
