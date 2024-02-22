@@ -1,20 +1,27 @@
 import React, { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import axios from 'axios'
 import styles from './HomePage.module.scss'
 import Categories from '../components/Categories/Categories'
 import PizzaList from '../components/PizzaList/PizzaList'
 import Sort from '../components/Sort/Sort'
 import NotFoundPage from './NotFoundPage'
+import Pagination from '../components/Pagination/Pagination'
+import { setTotalPages } from '../redux/slices/filterSlice'
 
 const HomePage = () => {
   const [pizzaList, setPizzaList] = useState([])
   const [isLoading, setIsLoading] = useState(false)
   const [isFoundItems, setIsFoundItems] = useState(true)
 
+  const dispatch = useDispatch()
+
   const categoryId = useSelector((state) => state.filter.categoryId)
   const sort = useSelector((state) => state.filter.sort)
   const searchValue = useSelector((state) => state.filter.searchValue)
+  const totalPages = useSelector((state) => state.filter.totalPages)
+  const currentPage = useSelector((state) => state.filter.currentPage)
+  const limitPage = useSelector((state) => state.filter.limitPage)
 
   useEffect(() => {
     const getPizza = async () => {
@@ -31,7 +38,8 @@ const HomePage = () => {
         const response = await axios.get(
           `${baseUrl}?${category}&${searchStr}&${sortType}&${sortOrder}`
         )
-
+        const countPages = Math.ceil(response.data.length / limitPage)
+        dispatch(setTotalPages(countPages))
         setPizzaList(response.data)
         setIsFoundItems(true)
       } catch (error) {
@@ -42,7 +50,19 @@ const HomePage = () => {
     }
 
     getPizza()
-  }, [categoryId, sort.sortProperty, sort.order, searchValue])
+  }, [
+    categoryId,
+    sort.sortProperty,
+    sort.order,
+    searchValue,
+    currentPage,
+    limitPage,
+    dispatch,
+  ])
+
+  const lastPizzaIndex = limitPage * currentPage
+  const firstPizzaIndex = lastPizzaIndex - limitPage
+  const pizzasOnPage = pizzaList.slice(firstPizzaIndex, lastPizzaIndex)
 
   return (
     <>
@@ -51,7 +71,10 @@ const HomePage = () => {
         <Sort />
       </div>
       {isFoundItems ? (
-        <PizzaList isLoading={isLoading} pizzaList={pizzaList} />
+        <>
+          <PizzaList isLoading={isLoading} pizzaList={pizzasOnPage} />
+          <Pagination currentPage={currentPage} totalPages={totalPages} />
+        </>
       ) : (
         <NotFoundPage />
       )}

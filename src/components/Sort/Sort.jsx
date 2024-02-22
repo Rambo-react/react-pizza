@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import styles from './Sort.module.scss'
 import { useSelector, useDispatch } from 'react-redux'
-import { setSort } from '../../redux/slices/filterSlice'
+import { setCurrentPage, setSort } from '../../redux/slices/filterSlice'
 
 const sortNames = [
   { name: 'популярности(возрастанию)', sortProperty: 'rating', order: 'asc' },
@@ -20,6 +20,7 @@ const Sort = () => {
 
   const selectSortHandler = (el) => {
     dispatch(setSort(el))
+    dispatch(setCurrentPage(1))
     setIsVisiblePopap(false)
   }
 

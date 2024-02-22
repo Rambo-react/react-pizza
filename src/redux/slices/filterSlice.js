@@ -8,6 +8,9 @@ const initialState = {
     order: 'asc',
   },
   searchValue: '',
+  totalPages: 1,
+  limitPage: 4,
+  currentPage: 1,
 }
 
 export const filterSlice = createSlice({
@@ -23,9 +26,21 @@ export const filterSlice = createSlice({
     setSearchValue(state, action) {
       state.searchValue = action.payload
     },
+    setCurrentPage(state, action) {
+      state.currentPage = action.payload
+    },
+    setTotalPages(state, action) {
+      state.totalPages = action.payload
+    },
   },
 })
 
-export const { setCategoryId, setSort, setSearchValue } = filterSlice.actions
+export const {
+  setCategoryId,
+  setSort,
+  setSearchValue,
+  setCurrentPage,
+  setTotalPages,
+} = filterSlice.actions
 
 export default filterSlice.reducer

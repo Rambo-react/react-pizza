@@ -29,6 +29,7 @@ const Search = () => {
         <SearchIcon />
       </div>
       <input
+        name='search'
         value={inputValue}
         onChange={onChangeHandler}
         placeholder='Поиск пицц...'

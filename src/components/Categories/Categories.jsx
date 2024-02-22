@@ -1,6 +1,6 @@
 import styles from './Categories.module.scss'
 import { useDispatch, useSelector } from 'react-redux'
-import { setCategoryId } from '../../redux/slices/filterSlice'
+import { setCategoryId, setCurrentPage } from '../../redux/slices/filterSlice'
 
 const categories = [
   'Все',
@@ -15,11 +15,16 @@ const Categories = () => {
   const categoryId = useSelector((state) => state.filter.categoryId)
   const dispatch = useDispatch()
 
+  const onSelectCategoryHandler = (index) => {
+    dispatch(setCategoryId(index))
+    dispatch(setCurrentPage(1))
+  }
+
   const content = categories.map((el, index) => (
     <li
       className={index === categoryId ? styles.active : ''}
       key={el}
-      onClick={() => dispatch(setCategoryId(index))}
+      onClick={() => onSelectCategoryHandler(index)}
     >
       {el}
     </li>
