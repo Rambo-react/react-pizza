@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import styles from './Sort.module.scss'
 import { useSelector, useDispatch } from 'react-redux'
 import { setCurrentPage, setSort } from '../../redux/slices/filterSlice'
@@ -15,6 +15,7 @@ export const sortNames = [
 const Sort = () => {
   const sort = useSelector((state) => state.filter.sort)
   const dispatch = useDispatch()
+  const sortRef = useRef()
 
   const [isVisiblePopup, setIsVisiblePopap] = useState(false)
 
@@ -34,8 +35,20 @@ const Sort = () => {
     </li>
   ))
 
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (!event.composedPath().includes(sortRef.current)) {
+        setIsVisiblePopap(false)
+      }
+    }
+
+    document.body.addEventListener('click', handleClickOutside)
+
+    return () => document.body.removeEventListener('click', handleClickOutside)
+  }, [])
+
   return (
-    <div className={styles.sort}>
+    <div ref={sortRef} className={styles.sort}>
       <div className={styles.label}>
         <svg
           width='10'

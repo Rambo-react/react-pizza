@@ -9,6 +9,7 @@
 .title {
   display: flex;
   align-items: center;
+  width: 60%;
   img {
     margin-right: 10px;
     width: 70px;
@@ -45,9 +46,13 @@
 
 .counter {
   button {
-    font-size: 2rem;
+    // display: flex;
+    // justify-content: center;
+    // align-items: center;
     border-color: $main-color;
+    font-size: 2rem;
     color: $main-color;
+    line-height: 2rem;
     &:hover {
       color: white;
       background-color: $main-color;
@@ -59,7 +64,7 @@
       transform: translateY(1px);
     }
   }
-  span {
+  .count {
     margin: 0 10px;
     font-size: 1.4rem;
     font-weight: 700;
@@ -72,10 +77,10 @@
 }
 
 .delete {
-  font-size: 1.4rem;
   border: 1px solid #f6f6f6;
   border-color: darken(#f6f6f6, 10);
 
+  font-size: 1.4rem;
   color: darken(#f6f6f6, 20);
 
   &:hover {
@@ -85,6 +90,8 @@
   }
 
   &:active {
+    border-color: lighten($color: black, $amount: 10);
     background-color: lighten($color: black, $amount: 10);
+    color: white;
   }
 }

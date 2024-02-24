@@ -1,12 +1,24 @@
 import React, { useState } from 'react'
 import styles from './PizzaItem.module.scss'
+import { useDispatch, useSelector } from 'react-redux'
+import { addItem } from '../../redux/slices/cartSlice'
 
-const PizzaItem = (props) => {
-  const typeNames = ['традиционное', 'тонкое']
+export const typeNames = ['традиционное', 'тонкое']
+
+const PizzaItem = ({ id, sizes, types, imageUrl, title, price }) => {
   const [activeType, setActiveType] = useState(0)
   const [activeSize, setActiveSize] = useState(0)
+  const addedCount = useSelector((state) =>
+    state.cart.items.reduce((count, item) => {
+      if (item.id === id) {
+        return count + item.count
+      }
+      return count
+    }, 0)
+  )
+  const dispatch = useDispatch()
 
-  const sizes = props.sizes.map((size, i) => (
+  const sizeList = sizes.map((size, i) => (
     <li
       onClick={() => setActiveSize(i)}
       className={i === activeSize ? styles.active : ''}
@@ -16,7 +28,7 @@ const PizzaItem = (props) => {
     </li>
   ))
 
-  const contentTypes = props.types.map((typeIndex, i) => (
+  const contentTypes = types.map((typeIndex, i) => (
     <li
       onClick={() => setActiveType(i)}
       className={i === activeType ? styles.active : ''}
@@ -26,20 +38,33 @@ const PizzaItem = (props) => {
     </li>
   ))
 
+  const onClickAdd = () => {
+    const item = {
+      id,
+      title,
+      price,
+      imageUrl,
+      type: activeType,
+      size: sizes[activeSize],
+    }
+
+    dispatch(addItem(item))
+  }
+
   return (
     <div className={styles.wrapper}>
       <div>
-        <img className={styles.image} src={props.imageUrl} alt={props.title} />
+        <img className={styles.image} src={imageUrl} alt={title} />
       </div>
 
-      <h4 className={styles.title}>{props.title}</h4>
+      <h4 className={styles.title}>{title}</h4>
       <div className={styles.selector}>
         <ul>{contentTypes}</ul>
-        <ul>{sizes}</ul>
+        <ul>{sizeList}</ul>
       </div>
       <div className={styles.bottom}>
-        <h3 className={styles.price}>{props.price} руб.</h3>
-        <button className={styles.button}>
+        <h3 className={styles.price}>{price} руб.</h3>
+        <button onClick={onClickAdd} className={styles.button}>
           <svg
             width='12'
             height='12'
@@ -53,7 +78,7 @@ const PizzaItem = (props) => {
             />
           </svg>
           <span>Добавить</span>
-          <i>1</i>
+          {addedCount > 0 && <i>{addedCount}</i>}
         </button>
       </div>
     </div>

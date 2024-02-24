@@ -112,7 +112,11 @@ const HomePage = () => {
       </div>
       {isFoundItems ? (
         <>
-          <PizzaList isLoading={isLoading} pizzaList={pizzasOnPage} />
+          <PizzaList
+            isLoading={isLoading}
+            pizzaList={pizzasOnPage}
+            limitPage={limitPage}
+          />
           <Pagination currentPage={currentPage} totalPages={totalPages} />
         </>
       ) : (

@@ -7,15 +7,15 @@ import {
   setFilters,
 } from '../../../redux/slices/filterSlice'
 import { useDispatch } from 'react-redux'
-import { useNavigate } from 'react-router'
+// import { useNavigate } from 'react-router'
 
 const HeaderLogo = () => {
   const dispatch = useDispatch()
-  const navigate = useNavigate()
+  // const navigate = useNavigate()
 
   const onClickHandler = () => {
     dispatch(setFilters({ ...filterInitialState }))
-    navigate('/')
+    // navigate('/')
     // window.location.search = ''
   }
 

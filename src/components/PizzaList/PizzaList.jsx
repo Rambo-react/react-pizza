@@ -3,11 +3,11 @@ import PizzaItem from './PizzaItem'
 import styles from './PizzaList.module.scss'
 import PizzaSkeleton from './PizzaSkeleton'
 
-const PizzaList = ({ isLoading, pizzaList }) => {
+const PizzaList = ({ isLoading, pizzaList, limitPage }) => {
   let content
 
   if (isLoading) {
-    content = [...new Array(8)].map((item, index) => (
+    content = [...new Array(limitPage)].map((item, index) => (
       <PizzaSkeleton key={index} />
     ))
   }

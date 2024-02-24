@@ -5,71 +5,62 @@ import CartIcon from '../UI/CartIcon'
 import TrashIcon from '../UI/TrashIcon'
 import { Link } from 'react-router-dom'
 import CartItem from './CartItem/CartItem'
+import { useDispatch, useSelector } from 'react-redux'
+import { clearItems } from '../../redux/slices/cartSlice'
 
-const Cart = (props) => {
+const Cart = () => {
+  const dispatch = useDispatch()
+  const cartItems = useSelector((state) => state.cart.items)
+  const totalPrice = useSelector((state) => state.cart.totalPrice)
+  const countItems = cartItems.reduce((count, item) => count + item.count, 0)
+
   let content
 
-  if (props.isEmpty) {
+  if (cartItems.length === 0) {
     content = <CartEmpty />
   }
 
-  const arrowLeftSvg = (
-    <svg
-      width='8'
-      height='14'
-      viewBox='0 0 8 14'
-      fill='none'
-      xmlns='http://www.w3.org/2000/svg'
-    >
-      <path
-        d='M7 13L1 6.93015L6.86175 1'
-        stroke='#D3D3D3'
-        strokeWidth='1.5'
-        strokeLinecap='round'
-        strokeLinejoin='round'
-      />
-    </svg>
-  )
+  if (cartItems.length > 0) {
+    const items = cartItems.map((item, index) => (
+      <CartItem key={index} {...item} />
+    ))
 
-  content = (
-    <div className={styles.cart}>
-      <div className={styles.top}>
-        <h2>
-          <CartIcon />
-          <span>Корзина</span>
-        </h2>
-        <div className={styles.clear}>
-          <TrashIcon />
-          <span>Очистить корзину</span>
+    content = (
+      <div className={styles.cart}>
+        <div className={styles.top}>
+          <h2>
+            <CartIcon />
+            <span>Корзина</span>
+          </h2>
+          <div className={styles.clear}>
+            <TrashIcon />
+            <span onClick={() => dispatch(clearItems())}>Очистить корзину</span>
+          </div>
         </div>
-      </div>
 
-      <ul className={styles.items}>
-        <CartItem />
-        <CartItem />
-      </ul>
+        <ul className={styles.items}>{items}</ul>
 
-      <div className={styles.bottom}>
-        <div className={styles.details}>
-          <span>
-            Всего пицц: <b>3 шт.</b>
-          </span>
-          <span>
-            Сумма заказа: <b className={styles.cost}>900 ₽</b>
-          </span>
-        </div>
-        <div className={styles.buttons}>
-          <Link to='/' className={`${styles.button} ${styles.back}`}>
-            {arrowLeftSvg}
-            <span>Вернуться назад</span>
-          </Link>
-          <div className={`${styles.button} ${styles.pay}`}>
-            <span>Оплатить сейчас</span>
+        <div className={styles.bottom}>
+          <div className={styles.details}>
+            <span>
+              Всего пицц: <b>{countItems} шт.</b>
+            </span>
+            <span>
+              Сумма заказа: <b className={styles.cost}>{totalPrice} руб.</b>
+            </span>
+          </div>
+          <div className={styles.buttons}>
+            <Link to='/' className={`${styles.button} ${styles.back}`}>
+              <span>Вернуться назад</span>
+            </Link>
+            <div className={`${styles.button} ${styles.pay}`}>
+              <span>Оплатить сейчас</span>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  )
+    )
+  }
 
   return <>{content}</>
 }
